@@ -29,9 +29,9 @@ namespace OnlineBookstore.API.Controllers
                 .Take(pageSize)
                 .ToList();
 
-                var totalNumBooks = _bookContext.Books.Count();
+            var totalNumBooks = _bookContext.Books.Count();
 
-                var someObject = new{
+            var someObject = new{
                     Books = books,
                     TotalNumBooks = totalNumBooks
                 };

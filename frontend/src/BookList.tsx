@@ -8,6 +8,8 @@ function BookList() {
   const [totalItems, setTotalItems] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [ascending, setAscending] = useState<boolean>(true); //default set to true
+
+  //fetch all books
   useEffect(() => {
     const fetchBooks = async () => {
       const response = await fetch(
