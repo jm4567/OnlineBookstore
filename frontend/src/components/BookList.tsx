@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Book } from './types/Books';
+import { Book } from '../types/Books';
 
-function BookList() {
+function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   const [books, setBooks] = useState<Book[]>([]); //setting it so it can be updated
   const [pageSize, setPageSize] = useState<number>(5);
   const [pageNum, setPageNum] = useState<number>(1);
@@ -12,9 +12,12 @@ function BookList() {
   //fetch all books
   useEffect(() => {
     const fetchBooks = async () => {
+      const categoryParams = selectedCategories
+        .map((cat) => `bookCat=${encodeURIComponent(cat)}`)
+        .join('&');
       const response = await fetch(
         //parameters to change result size, page number, and sort
-        `https://localhost:5000/api/Book?pageSize=${pageSize}&pageNum=${pageNum}&ascending=${ascending}`
+        `https://localhost:5000/api/Book?pageSize=${pageSize}&pageNum=${pageNum}&ascending=${ascending}${selectedCategories.length ? `&${categoryParams}` : ''}`
       );
       const data = await response.json();
       setBooks(data.books);
@@ -23,7 +26,7 @@ function BookList() {
     };
 
     fetchBooks();
-  }, [pageSize, pageNum, totalItems, ascending]);
+  }, [pageSize, pageNum, totalItems, ascending, selectedCategories]);
 
   //sorting ascending or descending
   const toggleSort = () => {
@@ -33,8 +36,6 @@ function BookList() {
 
   return (
     <>
-      <h1>Online Book Inventory</h1>
-      <br />
       <button onClick={toggleSort}>
         Sort by Title {ascending ? '(A-Z)' : '(Z-A)'}
       </button>
