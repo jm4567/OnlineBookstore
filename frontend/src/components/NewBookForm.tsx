@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Book } from '../types/Books';
 import { addBook } from '../api/BooksAPI';
 
-// This component will handle the form for adding a new project
+// This component will handle the form for adding a new book
 interface NewBookFormProps {
   onSuccess: () => void;
   onCancel: () => void;
@@ -57,7 +57,7 @@ const NewBookForm = ({ onSuccess, onCancel }: NewBookFormProps) => {
           Publisher:
           <input
             type="text"
-            name="publisher" //remember to match name in project.ts
+            name="publisher" //remember to match name in book.ts
             value={formData.publisher}
             onChange={handleChange}
           />
