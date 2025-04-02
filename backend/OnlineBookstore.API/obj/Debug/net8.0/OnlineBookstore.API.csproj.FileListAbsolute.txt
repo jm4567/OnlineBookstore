@@ -259,3 +259,8 @@
 /Users/jennamagleby/Desktop/OnlineBookstore/backend/OnlineBookstore.API/bin/Debug/net8.0/runtimes/win/lib/net7.0/System.Windows.Extensions.dll
 /Users/jennamagleby/Desktop/OnlineBookstore/backend/OnlineBookstore.API/obj/Debug/net8.0/OnlineBookstore.API.sourcelink.json
 /Users/jennamagleby/Desktop/OnlineBookstore/backend/OnlineBookstore.API/bin/Debug/net8.0/Bookstore.sqlite
+/Users/jennamagleby/Desktop/OnlineBookstore/backend/OnlineBookstore.API/bin/Debug/net8.0/publish/web.config
+/Users/jennamagleby/Desktop/OnlineBookstore/backend/OnlineBookstore.API/bin/Debug/net8.0/publish/appsettings.Development.json
+/Users/jennamagleby/Desktop/OnlineBookstore/backend/OnlineBookstore.API/bin/Debug/net8.0/publish/appsettings.json
+/Users/jennamagleby/Desktop/OnlineBookstore/backend/OnlineBookstore.API/bin/Debug/net8.0/publish/OnlineBookstore.API.deps.json
+/Users/jennamagleby/Desktop/OnlineBookstore/backend/OnlineBookstore.API/bin/Debug/net8.0/publish/OnlineBookstore.API.runtimeconfig.json
