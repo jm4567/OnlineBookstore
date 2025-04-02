@@ -4,35 +4,46 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { CartItem } from '../types/CartItem';
 import { useCart } from '../context/CartContext';
 import DarkModeToggle from './DarkModeToggle';
+import { fetchBooks } from '../api/BooksAPI';
+import Pagination from './Pagination';
 
 function BookList({ selectedCategories }: { selectedCategories: string[] }) {
   const [books, setBooks] = useState<Book[]>([]); //setting it so it can be updated
   const [pageSize, setPageSize] = useState<number>(5);
   const [pageNum, setPageNum] = useState<number>(1);
-  const [totalItems, setTotalItems] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [ascending, setAscending] = useState<boolean>(true); //default set to true
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   //fetch all books
   useEffect(() => {
-    const fetchBooks = async () => {
-      const categoryParams = selectedCategories
-        .map((cat) => `bookCat=${encodeURIComponent(cat)}`)
-        .join('&');
-      const response = await fetch(
-        //parameters to change result size, page number, and sort
-        `https://localhost:5000/api/Book?pageSize=${pageSize}&pageNum=${pageNum}&ascending=${ascending}${selectedCategories.length ? `&${categoryParams}` : ''}`
-      );
-      const data = await response.json();
-      setBooks(data.books);
-      setTotalItems(data.totalNumBooks);
-      setTotalPages(Math.ceil(totalItems / pageSize));
+    const loadBooks = async () => {
+      try {
+        setLoading(true);
+        const data = await fetchBooks(
+          pageSize,
+          pageNum,
+          ascending,
+          selectedCategories
+        );
+        setBooks(data.books);
+        setTotalPages(Math.ceil(data.totalNumBooks / pageSize));
+      } catch (error) {
+        setError((error as Error).message);
+      } finally {
+        //even if there is error, but we need to execute
+        setLoading(false);
+      }
     };
 
-    fetchBooks();
-  }, [pageSize, pageNum, totalItems, ascending, selectedCategories]);
+    loadBooks();
+  }, [pageSize, pageNum, ascending, selectedCategories]);
+
+  if (loading) return <p>Loading projects...</p>;
+  if (error) return <p className="text-red-500"> Error: {error}</p>;
 
   //sorting ascending or descending
   const toggleSort = () => {
@@ -84,42 +95,16 @@ function BookList({ selectedCategories }: { selectedCategories: string[] }) {
           </div>
         </div>
       ))}
-      <button disabled={pageNum === 1} onClick={() => setPageNum(pageNum - 1)}>
-        Previous
-      </button>
-      {[...Array(totalPages)].map(
-        //for loop but with map
-        (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => setPageNum(index + 1)}
-            disabled={pageNum === index + 1}
-          >
-            {index + 1}
-          </button>
-        )
-      )}
-      <button
-        disabled={pageNum === totalPages}
-        onClick={() => setPageNum(pageNum + 1)}
-      >
-        Next
-      </button>
-      <br />
-      <label>
-        Results per page:
-        <select
-          value={pageSize}
-          onChange={(p) => {
-            setPageSize(Number(p.target.value));
-            setPageNum(1);
-          }}
-        >
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-        </select>
-      </label>
+      <Pagination
+        currentPage={pageNum}
+        totalPages={totalPages}
+        pageSize={pageSize}
+        onPageChange={setPageNum}
+        onPageSizeChange={(newSize) => {
+          setPageSize(newSize);
+          setPageNum(1);
+        }}
+      />
     </>
   );
 }
