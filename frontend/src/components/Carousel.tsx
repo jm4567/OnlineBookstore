@@ -9,35 +9,27 @@ function Carousel() {
       <div className="carousel-inner">
         <div className="carousel-item active">
           <img
-            src="src/assets/americannulyysees.jpg"
+            src="/images/americannulyysees.jpg"
             className="d-block w-100"
             alt="..."
           />
         </div>
         <div className="carousel-item">
+          <img src="/images/deepwork.jpg" className="d-block w-100" alt="..." />
+        </div>
+        <div className="carousel-item">
           <img
-            src="src/assets/deepwork.jpg"
+            src="/images/itsyourship.jpg"
             className="d-block w-100"
             alt="..."
           />
         </div>
         <div className="carousel-item">
-          <img
-            src="src/assets/lesmis.jpg"
-            className="d-block w-100"
-            alt="..."
-          />
+          <img src="/images/lesmis.jpg" className="d-block w-100" alt="..." />
         </div>
         <div className="carousel-item">
           <img
-            src="src/assets/itsyourship.jpg"
-            className="d-block w-100"
-            alt="..."
-          />
-        </div>
-        <div className="carousel-item">
-          <img
-            src="src/assets/sleepsmarter.jpg"
+            src="/images/SleepSmarter.jpg"
             className="d-block w-100"
             alt="..."
           />
