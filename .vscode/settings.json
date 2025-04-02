@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "undefined/subscriptions/0bf7071c-a82a-4d3c-8afb-ae386a64212e/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/OnlineBookstore-Magleby-Backend",
+  "appService.deploySubpath": "backend/OnlineBookstore.API/publish"
+}
