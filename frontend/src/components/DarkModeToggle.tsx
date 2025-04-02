@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function DarkModeToggle() {
   // Initialize dark mode from localStorage, default to false

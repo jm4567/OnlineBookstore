@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Book } from '../types/Books';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CartItem } from '../types/CartItem';
 import { useCart } from '../context/CartContext';
 import DarkModeToggle from './DarkModeToggle';
